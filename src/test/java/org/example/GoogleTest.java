@@ -6,9 +6,11 @@ import io.qameta.allure.Epic;
 import org.example.pages.GoogleCalc;
 import org.example.pages.StartGooglePage;
 import org.testng.Assert;
-import org.testng.annotations.*;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.DataProvider;
+import org.testng.annotations.Test;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -45,7 +47,7 @@ public class GoogleTest {
     @AfterTest
     public void clearResult() throws IOException {
         String screen = Selenide.screenshot("screen");
-        saveScreenshot(Files.readAllBytes(Paths.get(screen)));
+        saveScreenshot(Files.readAllBytes(Selenide.$("body").screenshot().toPath()));
         calc.clearAll();
     }
 
