@@ -23,8 +23,8 @@ public class GoogleTest {
                 {"1 + 2 - 3 =", "0"},
                 {"5 * 7 =", "35"},
                 {"14 / 7 % * 80 =", "16000"},
-                {"1 / asdfasd =", "Infinity"},
-                {"999999999 x! =", "Ifinity"},
+                {"1 / 0 =", "Infinity"},
+                {"999999999 x! =", "Infinity"},
         };
     }
 
