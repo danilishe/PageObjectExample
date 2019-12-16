@@ -7,8 +7,9 @@ import org.openqa.selenium.Keys;
 import static com.codeborne.selenide.Selenide.$;
 
 public class StartGooglePage {
-    public StartGooglePage() {
+    public StartGooglePage open() {
         Selenide.open("https://google.com");
+        return this;
     }
 
     public ResultPage search(String s) {

@@ -7,66 +7,54 @@ import static com.codeborne.selenide.Selenide.$x;
 
 public class GoogleCalc {
     final SelenideElement calc = $x("//h2[text()='Калькулятор']/following-sibling::div");
+    private final SelenideElement calcResult = calc.$x(".//*[@id='cwos']");
 
     public GoogleCalc() {
         calc.shouldBe(Condition.visible);
     }
 
-    public GoogleCalc press_oneBtn() {
-        calc.$x(".//div[text()='1']").click();
-        return this;
+    public String getResult() {
+        return calcResult.getText();
     }
-
-    public GoogleCalc press_twoBtn() {
-        $x(".//div[text()='2']").click();
-        return this;
-    }
-
-    public GoogleCalc press_threeBtn() {
-        $x(".//div[text()='3']").click();
-        return this;
-    }
-
-    public GoogleCalc press_minusBtn() {
-        $x(".//div[text()='−']").click();
-        return this;
-    }
-
-    public GoogleCalc press_equalBtn() {
-        $x(".//div[text()='=']").click();
-        return this;
-    }
-
-    public GoogleCalc press_plusBtn() {
-        $x(".//div[text()='+']").click();
-        return this;
-    }
-
-    public String result() {
-        return $x(".//*[@id='cwos']").getText();
-    }
-
 
     public GoogleCalc type(String s) {
-        for (char c : s.toCharArray()) {
-            switch (c) {
-                case '1':
-                    press_oneBtn();
+        for (String token : s.trim().split("\\s+")) {
+            switch (token) {
+                case "-":
+                    pressButton("−");
                     break;
-                case '2':
-                    press_twoBtn();
+                case "*":
+                    pressButton("×");
                     break;
-                case '3':
-                    press_threeBtn();
+                case "/":
+                    pressButton("÷");
                     break;
-                case '+':
-                    press_plusBtn();
+
+                case "x!":
+                    pressButton("x!");
                     break;
-                case '-':
-                    press_minusBtn();
-                    break;
+                default:
+                    if (token.length() > 1 && token.matches("\\D+"))
+                        throw new IllegalArgumentException("Значения в выражении должны быть разделены пробелом, " +
+                                "либо состоять только из цифр: [" + token + "] - не подходит");
+                    for (Character key : token.toCharArray()) {
+                        pressButton(key.toString());
+                    }
             }
         }
         return this;
+    }
+
+    public GoogleCalc pressButton(String key) {
+        $x(".//div[text()='" + key + "']").click();
+        return this;
+    }
+
+    public void clearAll() {
+        $x("//div[text()='AC']").click();
+    }
+
+    public void removeSymbol() {
+        $x("//div[text()='CE']").click();
     }
 }
