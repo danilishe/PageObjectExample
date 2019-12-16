@@ -1,35 +1,41 @@
 package org.example;
 
+import com.codeborne.selenide.Selenide;
+import io.qameta.allure.Attachment;
+import io.qameta.allure.Epic;
 import org.example.pages.GoogleCalc;
 import org.example.pages.StartGooglePage;
 import org.testng.Assert;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.DataProvider;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
+@Epic("Тестирование калькулятора")
 public class GoogleTest {
     GoogleCalc calc;
 
-    @DataProvider
+    @DataProvider(parallel = true)
     public static Object[][] positive() {
         return new Object[][]{
                 {"1 + 2 - 3 =", "0"},
                 {"5 * 7 =", "35"},
                 {"14 / 7 % * 80 =", "16000"},
-                {"1 / 0 =", "Infinity"},
-                {"999999999 x! =", "Infinity"},
+                {"1 / asdfasd =", "Infinity"},
+                {"999999999 x! =", "Ifinity"},
         };
     }
 
-    @BeforeTest
+    @BeforeMethod(description = "Открытие страницы калькулятора")
     public void setUp() {
         calc = new StartGooglePage().open()
                 .search("1-1")
                 .googleCalc();
     }
 
-    @Test(dataProvider = "positive")
+    @Test(dataProvider = "positive", description = "Проверка выражения")
     public void testDigits(String input, String exResult) {
         final String result = calc.type(input)
                 .getResult();
@@ -37,8 +43,14 @@ public class GoogleTest {
     }
 
     @AfterTest
-    public void clearResult() {
+    public void clearResult() throws IOException {
+        String screen = Selenide.screenshot("screen");
+        saveScreenshot(Files.readAllBytes(Paths.get(screen)));
         calc.clearAll();
     }
 
+    @Attachment(value = "Скриншот", type = "image/png")
+    public byte[] saveScreenshot(byte[] screenShot) {
+        return screenShot;
+    }
 }
