@@ -13,13 +13,12 @@ import org.testng.annotations.Test;
 
 import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.Paths;
 
 @Epic("Тестирование калькулятора")
 public class GoogleTest {
     GoogleCalc calc;
 
-    @DataProvider(parallel = true)
+    @DataProvider
     public static Object[][] positive() {
         return new Object[][]{
                 {"1 + 2 - 3 =", "0"},
