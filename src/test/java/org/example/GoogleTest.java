@@ -1,15 +1,19 @@
 package org.example;
 
 import com.codeborne.selenide.Selenide;
-import cucumber.api.CucumberOptions;
 import io.cucumber.testng.AbstractTestNGCucumberTests;
+import io.cucumber.testng.CucumberOptions;
 import org.example.pages.GoogleCalc;
 import org.example.pages.StartGooglePage;
 
 import java.io.IOException;
-import java.nio.file.Files;
 
-@CucumberOptions(glue = "org.example.steps", features = "src/test/resources/feature")
+@CucumberOptions(
+        glue = "org.example.steps",
+        features = "src/test/resources/feature",
+        tags = {}
+)
+
 public class GoogleTest extends AbstractTestNGCucumberTests {
     GoogleCalc calc;
 
