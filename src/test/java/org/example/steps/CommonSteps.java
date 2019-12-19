@@ -3,6 +3,7 @@ package org.example.steps;
 import cucumber.api.java.ru.Дано;
 import cucumber.api.java.ru.Если;
 import cucumber.api.java.ru.Тогда;
+import org.example.Expression;
 import org.example.pages.GoogleCalc;
 import org.example.pages.StartGooglePage;
 import org.testng.Assert;
@@ -17,9 +18,9 @@ public class CommonSteps {
                 .googleCalc();
     }
 
-    @Если("набрать на клавиатуре калькулятора {string}")
-    public void набратьНаКлавиатуреКалькулятора(String expression) {
-        calc.type(expression);
+    @Если("набрать на клавиатуре калькулятора {exp}")
+    public void набратьНаКлавиатуреКалькулятора(Expression expression) {
+        calc.type(expression.exp);
     }
 
     @Тогда("в поле результата будет {string}")
