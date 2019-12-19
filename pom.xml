@@ -57,10 +57,44 @@
             <artifactId>selenide</artifactId>
             <version>5.5.1</version>
         </dependency>
+        <!--        <dependency>-->
+        <!--            <groupId>io.qameta.allure</groupId>-->
+        <!--            <artifactId>allure-java-commons</artifactId>-->
+        <!--            <version>2.13.0</version>-->
+        <!--            <scope>test</scope>-->
+        <!--        </dependency>-->
         <dependency>
             <groupId>io.qameta.allure</groupId>
-            <artifactId>allure-testng</artifactId>
+            <artifactId>allure-cucumber4-jvm</artifactId>
             <version>2.13.0</version>
+            <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>io.cucumber</groupId>
+                    <artifactId>cucumber-java</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>io.cucumber</groupId>
+                    <artifactId>cucumber-core</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-java</artifactId>
+            <version>4.7.2</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-java8</artifactId>
+            <version>4.7.2</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-testng</artifactId>
+            <version>4.7.2</version>
             <scope>test</scope>
         </dependency>
     </dependencies>

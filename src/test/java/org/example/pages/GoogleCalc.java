@@ -2,7 +2,6 @@ package org.example.pages;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
-import io.qameta.allure.Step;
 
 import static com.codeborne.selenide.Selenide.$x;
 
@@ -14,12 +13,10 @@ public class GoogleCalc {
         calc.shouldBe(Condition.visible);
     }
 
-    @Step("Получение результата")
     public String getResult() {
         return calcResult.getText();
     }
 
-    @Step("Набор на клавиатуре \"{s}\"")
     public GoogleCalc type(String s) {
         for (String token : s.trim().split("\\s+")) {
             switch (token) {
@@ -48,18 +45,15 @@ public class GoogleCalc {
         return this;
     }
 
-    @Step("Нажимаем кнопку \"{key}\"")
     public GoogleCalc pressButton(String key) {
         $x(".//div[text()='" + key + "']").click();
         return this;
     }
 
-    @Step("Нажимаем кнопку очистки калькулятора")
     public void clearAll() {
         $x("//div[text()='AC']").click();
     }
 
-    @Step("Нажимаем кнопку удаления символа")
     public void removeSymbol() {
         $x("//div[text()='CE']").click();
     }
