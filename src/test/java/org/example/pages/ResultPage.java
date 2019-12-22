@@ -1,19 +1,9 @@
 package org.example.pages;
 
-import com.codeborne.selenide.Condition;
+import io.qameta.atlas.webdriver.WebPage;
+import io.qameta.atlas.webdriver.extension.FindBy;
 
-import static com.codeborne.selenide.Selenide.$x;
-
-public class ResultPage {
-    public ResultPage() {
-        $x("//*[@id='hdtb']").shouldBe(Condition.visible);
-    }
-
-    public GoogleCalc googleCalc() {
-        return new GoogleCalc();
-    }
-
-    public GoogleVideoResult googleVideoResult() {
-        return new GoogleVideoResult();
-    }
+public interface ResultPage extends WebPage {
+    @FindBy("//h2[text()='Калькулятор']/following-sibling::div")
+    GoogleCalc calc();
 }

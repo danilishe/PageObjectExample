@@ -9,6 +9,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <aspectj.version>1.9.4</aspectj.version>
         <cucumber.tags>not @ignore</cucumber.tags>
+        <atlas.version>1.6.0</atlas.version>
     </properties>
     <build>
         <plugins>
@@ -48,18 +49,12 @@
     <version>1.0-SNAPSHOT</version>
 
     <dependencies>
-        <!--        <dependency>-->
-        <!--            <groupId>org.testng</groupId>-->
-        <!--            <artifactId>testng</artifactId>-->
-        <!--            <version>7.0.0</version>-->
-        <!--            <scope>test</scope>-->
-        <!--        </dependency>-->
         <dependency>
-            <groupId>com.codeborne</groupId>
-            <artifactId>selenide</artifactId>
-            <version>5.5.1</version>
+            <groupId>io.github.bonigarcia</groupId>
+            <artifactId>webdrivermanager</artifactId>
+            <version>3.7.1</version>
+            <scope>test</scope>
         </dependency>
-
         <dependency>
             <groupId>io.qameta.allure</groupId>
             <artifactId>allure-cucumber4-jvm</artifactId>
@@ -75,6 +70,16 @@
                     <artifactId>cucumber-core</artifactId>
                 </exclusion>
             </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>io.qameta.atlas</groupId>
+            <artifactId>atlas-core</artifactId>
+            <version>${atlas.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.qameta.atlas</groupId>
+            <artifactId>atlas-webdriver</artifactId>
+            <version>${atlas.version}</version>
         </dependency>
         <dependency>
             <groupId>io.cucumber</groupId>

@@ -1,19 +1,15 @@
 package org.example.pages;
 
-import com.codeborne.selenide.Selenide;
-import org.openqa.selenium.By;
+import io.qameta.atlas.webdriver.AtlasWebElement;
+import io.qameta.atlas.webdriver.WebPage;
+import io.qameta.atlas.webdriver.extension.FindBy;
 import org.openqa.selenium.Keys;
 
-import static com.codeborne.selenide.Selenide.$;
+public interface StartGooglePage extends WebPage {
+    @FindBy("//*[@name='q']")
+    AtlasWebElement searchField();
 
-public class StartGooglePage {
-    public StartGooglePage open() {
-        Selenide.open("https://google.com");
-        return this;
-    }
-
-    public ResultPage search(String s) {
-        $(By.name("q")).sendKeys(s, Keys.ENTER);
-        return new ResultPage();
+    default void search(String s) {
+        searchField().sendKeys(s, Keys.ENTER);
     }
 }
