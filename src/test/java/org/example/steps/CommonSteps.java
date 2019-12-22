@@ -9,6 +9,7 @@ import io.qameta.atlas.core.Atlas;
 import io.qameta.atlas.core.context.RetryerContext;
 import io.qameta.atlas.core.internal.DefaultRetryer;
 import io.qameta.atlas.webdriver.WebDriverConfiguration;
+import org.example.extensions.LogExtension;
 import org.example.pages.ResultPage;
 import org.example.pages.StartGooglePage;
 import org.openqa.selenium.WebDriver;
@@ -28,7 +29,8 @@ public class CommonSteps {
         webDriver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
         webDriver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         this.atlas = new Atlas(new WebDriverConfiguration(webDriver))
-                .context(new RetryerContext(new DefaultRetryer(10_000L, 1_000L, Collections.singletonList(Throwable.class))));
+                .context(new RetryerContext(new DefaultRetryer(10_000L, 1_000L, Collections.singletonList(Throwable.class))))
+                .extension(new LogExtension());
     }
 
     @After
